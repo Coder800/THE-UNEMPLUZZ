@@ -1,15 +1,19 @@
 #CREATE THE FAST API APP
 # ENABLE CORS
 #REGISTER THE ROUTES
-
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes.chat import router as chat_router
 
-app = FastAPI()
+
+from prompts.choices import INTEREST_AREAS, TONE_STYLES, OBSTACLES
+
+app = FastAPI(title="Adaptive AI Bridge")
+
 
 origins = [
     "http://localhost:5173",
+    "http://127.0.0.1:5173", # Good to have both
 ]
 
 app.add_middleware(
@@ -20,9 +24,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+app.include_router(chat_router)
+
 @app.get("/")
 def root():
-    return {"message": "Backend is running"}
+    return {"message": "Adaptive AI Backend is running"}
+
+
+@app.get("/config")
+def get_config():
+    return {
+        "interests": INTEREST_AREAS,
+        "tones": TONE_STYLES,
+        "obstacles": OBSTACLES
+    }
 
 @app.get("/hello")
 def hello():

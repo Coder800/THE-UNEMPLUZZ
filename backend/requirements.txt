@@ -1,6 +1,7 @@
 fastapi
 uvicorn[standard]
 python-dotenv
-google-generativeai
+pydantic-settings
+google-genai
 firebase-admin
 google-cloud-vision
