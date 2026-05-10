@@ -23,7 +23,15 @@ OBSTACLES = [
     "Information Overload", "Stupidity"
     "None"
 ]
+LANGUAGES = [
+    "English", "Spanish", "French", "German", 
+    "Hindi", "Mandarin", "Arabic", "Portuguese"
+]
 
+OCCUPATIONS = [
+    "Student", "Manual Laborer", "Office Worker", 
+    "Healthcare", "Education", "Unemployed", "Retired"
+]
 # prompts/templates.py
 
 SYSTEM_BASE_INSTRUCTION = """
