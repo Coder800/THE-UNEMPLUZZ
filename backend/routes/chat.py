@@ -32,6 +32,10 @@ class ChatRequest(BaseModel):
     image_base64: str = None 
     primary_language: str = "English" 
     occupation: str = "General"
+    name: str = "User"
+    gender: str = "Not specified"  # Free text field
+    origin: str = "Unknown"
+    diagnosis: str = "None"
 
 @router.post("/")
 async def chat_with_gemini(request: ChatRequest):
@@ -50,8 +54,12 @@ async def chat_with_gemini(request: ChatRequest):
         # 2. Construct the Hyper-Personalized Persona
         persona = (
             f"{SYSTEM_BASE_INSTRUCTION}\n"
+            f"PRIVACY RULE: If the uploaded image contains sensitive PII (SSNs, clear ID numbers, full addresses), "
+            f"DO NOT transcribe or repeat them. Acknowledge the document's purpose but redact the sensitive info "
+            f"in your explanation for the user's safety."
             f"USER PROFILE:\n"
             f"- Age: {request.age}\n"
+            f"- Gender: {request.gender}\n"
             f"- Occupation: {request.occupation}\n"
             f"- Interests: {', '.join(request.interests)}\n"
             f"- Adaptation Rules: {' '.join(adaptations)}\n\n"
