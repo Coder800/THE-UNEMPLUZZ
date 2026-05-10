@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
+import AppRoutes from "../components/AppRoutes.jsx";
 
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:8000/hello")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
-
   return (
     <div>
-      <h1>{message}</h1>
+      <AppRoutes />
     </div>
   );
 }
 
 export default App;
+
